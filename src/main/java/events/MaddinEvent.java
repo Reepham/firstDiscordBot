@@ -19,10 +19,10 @@ public class MaddinEvent extends ListenerAdapter {
         String[] receivedMessage = event.getMessage().getContentRaw().split(" ");
         JDA client = event.getJDA();
         Guild guild = event.getGuild();
-        String message = "Fallback-Message";
+        String message;
         if (!event.getMember().getUser().isBot()){
-            switch (receivedMessage[0]){
-                case "!Maddin":
+            switch (receivedMessage[0].toLowerCase()){
+                case "!maddin":
                     try {
                         ping = client.getUserByTag("Maddin#7057").getAsMention();
                     }catch (NullPointerException e){
@@ -40,7 +40,7 @@ public class MaddinEvent extends ListenerAdapter {
                         List<Message> messages = history.retrievePast(100).complete();
 
                         if (receivedMessage.length>1){
-                            List<Message> filtermessages = new ArrayList<Message>();
+                            List<Message> filtermessages = new ArrayList<>();
                             for (Message m:messages) {
                                 if (m.getContentRaw().matches("(?i).*\\b"+receivedMessage[1]+"\\b.*")){
                                     filtermessages.add(m);
