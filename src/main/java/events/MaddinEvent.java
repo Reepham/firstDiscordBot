@@ -56,7 +56,14 @@ public class MaddinEvent extends ListenerAdapter {
 
                         Random ran = new Random();
                         int x = ran.nextInt(messages.size());
-                        message = messages.get(x).getContentRaw();
+
+                        if (messages.get(x).getAttachments().size()>0){
+                            message = messages.get(x).getAttachments().get(0).getProxyUrl();
+                        } else{
+                            message = messages.get(x).getContentRaw();
+                        }
+
+
                         event.getChannel().sendMessage(message).queue();
 
                         break;
