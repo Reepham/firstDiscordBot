@@ -33,7 +33,7 @@ public class MaddinEvent extends ListenerAdapter {
                     event.getChannel().sendMessage(message).queue();
                     break;
 
-                case "!quote":
+                case "!quote": case "!quotes":
                     List<TextChannel> channels = guild.getTextChannelsByName("quotes", true);
                     for (TextChannel channel : channels) {
                         MessageHistory history = new MessageHistory(channel);
