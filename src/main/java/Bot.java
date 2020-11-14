@@ -7,13 +7,18 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Bot {
 
-    public static void main(String[] args) throws LoginException {
+    public static void main(String[] args) throws LoginException, IOException {
+        String token = Files.readString(Paths.get("B:\\Desktop\\Java Projekte\\DiscordBotLogin.txt"), StandardCharsets.US_ASCII);
 
         JDA jda =  JDABuilder
-                .createDefault("Nzc2ODQ2MjUwNTU3NDQwMDAy.X660cw.eAmOBG4BO_35FbjPGANy60IC-gY")
+                .createDefault(token)
                 .setChunkingFilter(ChunkingFilter.ALL)
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS)
