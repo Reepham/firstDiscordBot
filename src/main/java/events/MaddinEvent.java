@@ -59,13 +59,12 @@ public class MaddinEvent extends ListenerAdapter {
 
                         if (messages.get(x).getAttachments().size()>0){
                             message = messages.get(x).getAttachments().get(0).getProxyUrl();
+                            message += "\n " +messages.get(x).getContentRaw();
                         } else{
                             message = messages.get(x).getContentRaw();
                         }
 
-
                         event.getChannel().sendMessage(message).queue();
-
                         break;
                     }
             }
