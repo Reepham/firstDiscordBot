@@ -21,6 +21,5 @@ public class Bot {
         jda.addEventListener(new MaddinEvent());
         jda.addEventListener(new JoinEvent());
 
-
     }
 }
