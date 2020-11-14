@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -28,6 +29,7 @@ public class MaddinEvent extends ListenerAdapter {
                         ping =  event.getMember().getAsMention();
                     }
                     message = ping + " du suckst!";
+
                     event.getChannel().sendMessage(message).queue();
                     break;
 
@@ -35,12 +37,28 @@ public class MaddinEvent extends ListenerAdapter {
                     List<TextChannel> channels = guild.getTextChannelsByName("quotes", true);
                     for (TextChannel channel : channels) {
                         MessageHistory history = new MessageHistory(channel);
-
                         List<Message> messages = history.retrievePast(100).complete();
+
+                        if (receivedMessage.length>1){
+                            List<Message> filtermessages = new ArrayList<Message>();
+                            for (Message m:messages) {
+                                if (m.getContentRaw().matches(".*\\b"+receivedMessage[1]+"\\b.*")){
+                                    filtermessages.add(m);
+                                }
+                            }
+                            messages = filtermessages;
+                            if (messages.size() == 0){
+                                message = "Leider keine Quotes gefunden";
+                                event.getChannel().sendMessage(message).queue();
+                                break;
+                            }
+                        }
+
                         Random ran = new Random();
-                        int x = ran.nextInt(messages.size()-1);
+                        int x = ran.nextInt(messages.size());
                         message = messages.get(x).getContentRaw();
                         event.getChannel().sendMessage(message).queue();
+
                         break;
                     }
             }
