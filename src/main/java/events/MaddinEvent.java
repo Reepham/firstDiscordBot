@@ -28,6 +28,7 @@ public class MaddinEvent extends ListenerAdapter {
                         ping =  event.getMember().getAsMention();
                     }
                     message = ping + " du suckst!";
+                    event.getChannel().sendMessage(message).queue();
                     break;
 
                 case "!quote":
@@ -39,10 +40,11 @@ public class MaddinEvent extends ListenerAdapter {
                         Random ran = new Random();
                         int x = ran.nextInt(messages.size()-1);
                         message = messages.get(x).getContentRaw();
+                        event.getChannel().sendMessage(message).queue();
                         break;
                     }
             }
-            event.getChannel().sendMessage(message).queue();
+
         }
 
     }
