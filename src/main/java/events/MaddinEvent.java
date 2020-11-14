@@ -7,12 +7,14 @@ import net.dv8tion.jda.api.entities.MessageHistory;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class MaddinEvent extends ListenerAdapter {
+
 
     public void onGuildMessageReceived(GuildMessageReceivedEvent event){
         String ping;
@@ -31,6 +33,23 @@ public class MaddinEvent extends ListenerAdapter {
                     message = ping + " du suckst!";
 
                     event.getChannel().sendMessage(message).queue();
+                    break;
+
+                case "!joke":
+
+                        JSONObject json = Util.readJsonFromUrl("https://sv443.net/jokeapi/v2/joke/Any?lang=de");
+
+                        try {
+                            message = (String)json.get("setup");
+                            message = message + "\n"+json.get("delivery");
+                        }catch (Exception e){
+                            message = (String) json.get("joke");
+                        }
+
+
+                        event.getChannel().sendMessage(message).queue();
+
+
                     break;
 
                 case "!quote": case "!quotes":
