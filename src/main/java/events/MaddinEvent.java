@@ -42,7 +42,7 @@ public class MaddinEvent extends ListenerAdapter {
                         if (receivedMessage.length>1){
                             List<Message> filtermessages = new ArrayList<Message>();
                             for (Message m:messages) {
-                                if (m.getContentRaw().matches(".*\\b"+receivedMessage[1]+"\\b.*")){
+                                if (m.getContentRaw().matches("(?i).*\\b"+receivedMessage[1]+"\\b.*")){
                                     filtermessages.add(m);
                                 }
                             }
