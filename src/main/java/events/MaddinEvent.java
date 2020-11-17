@@ -87,8 +87,8 @@ public class MaddinEvent extends ListenerAdapter {
 
               case "!obichdummbin":
 
-                float prozentSatz = Util.getQuoteCount(member) * 100;
-                message = "Du bist zu " + prozentSatz + "% dumm!";
+                double prozentSatz = Util.getQuoteCount(member) * 100;
+                message = "Du bist zu " + Util.round(prozentSatz,2) + "% dumm!";
                 event.getChannel().sendMessage(message).queue();
 
                 break;

@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import sqlite.SQLite;
 
 import java.io.*;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.sql.ResultSet;
@@ -41,11 +43,19 @@ public class Util {
 
     }
 
-    public static float getQuoteCount(String userID) {
+    public static double round(double value, int places) {
+        if (places < 0) throw new IllegalArgumentException();
+
+        BigDecimal bd = BigDecimal.valueOf(value);
+        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        return bd.doubleValue();
+    }
+
+    public static double getQuoteCount(String userID) {
         try {
             ResultSet rs1 = SQLite.onQuery("SELECT COUNT('zitattext') AS zitattext FROM quotes WHERE username = '" + userID + "'");
             ResultSet rs2 = SQLite.onQuery("SELECT COUNT('zitattext') AS zitattext FROM quotes");
-            Float prozentwert = rs1.getFloat(1) / rs2.getFloat(1);
+            double prozentwert = rs1.getDouble(1) / rs2.getDouble(1);
             return prozentwert;
 
         } catch (SQLException e) {
