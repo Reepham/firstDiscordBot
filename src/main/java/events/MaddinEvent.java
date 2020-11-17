@@ -20,6 +20,7 @@ public class MaddinEvent extends ListenerAdapter {
         String ping;
         String[] receivedMessage = event.getMessage().getContentRaw().split(" ");
         JDA client = event.getJDA();
+        String member = event.getAuthor().getId();
         Guild guild = event.getGuild();
         String message;
         if (!event.getMember().getUser().isBot()){
@@ -85,6 +86,16 @@ public class MaddinEvent extends ListenerAdapter {
 
                         event.getChannel().sendMessage(message).queue();
                         break;
+            	     }
+
+              case "!obichdummbin":
+
+                float prozentSatz = Util.getQuoteCount(member) * 100;
+                message = "Du bist zu " + prozentSatz + "% dumm!";
+                event.getChannel().sendMessage(message).queue();
+
+                break;
+
                     }
             }
 

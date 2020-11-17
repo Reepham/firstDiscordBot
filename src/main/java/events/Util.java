@@ -35,5 +35,18 @@ public class Util {
                 e.printStackTrace();
             }
             return null;
+
+      public static float getQuoteCount(String userID) {
+          try {
+              ResultSet rs1 = SQLite.onQuery("SELECT COUNT('zitattext') AS zitattext FROM quotes WHERE username = '" + userID + "'");
+              ResultSet rs2 = SQLite.onQuery("SELECT COUNT('zitattext') AS zitattext FROM quotes");
+              Float prozentwert = rs1.getFloat(1) / rs2.getFloat(1);
+              return prozentwert;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            return 0;
+
         }
 }
