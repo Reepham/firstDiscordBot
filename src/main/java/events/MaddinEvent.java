@@ -93,10 +93,10 @@ public class MaddinEvent extends ListenerAdapter {
 
                 break;
 
-                    }
             }
-
         }
 
     }
+
 }
+
