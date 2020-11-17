@@ -47,10 +47,7 @@ public class MaddinEvent extends ListenerAdapter {
                             message = (String) json.get("joke");
                         }
 
-
                         event.getChannel().sendMessage(message).queue();
-
-
                     break;
 
                 case "!quote": case "!quotes":

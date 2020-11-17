@@ -21,7 +21,7 @@ public class JoinEvent extends ListenerAdapter {
         List<TextChannel> channels = guild.getTextChannelsByName("general", true); // Get the list of channels in the guild that matches that name.
 
         for (TextChannel channel : channels) { // Loops through the channels and sends a message to each one.
-            channel.sendMessage("Herzlich Willkommen " + event.getMember().getAsMention() + "!\nStell dich doch mal vor ^^").queue();
+            channel.sendMessage("Herzlich Willkommen " + member.getAsMention() + "!\nStell dich doch mal vor ^^").queue();
         }
     }
 }
