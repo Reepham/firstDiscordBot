@@ -45,9 +45,14 @@ public class Util {
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
+        BigDecimal bd;
+        try{
+            bd = BigDecimal.valueOf(value);
+            bd = bd.setScale(places, RoundingMode.HALF_UP);
+        }catch (Exception e){
+            return value;
+        }
 
-        BigDecimal bd = BigDecimal.valueOf(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
         return bd.doubleValue();
     }
 
