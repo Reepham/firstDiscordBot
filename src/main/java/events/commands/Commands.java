@@ -5,6 +5,9 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.*;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -29,6 +32,20 @@ public class Commands {
     }
 
     public void maddin(JDA client, Member member, TextChannel channel){
+        LocalDate maddincache = Util.getMaddindate();
+        if (maddincache==null){
+            Util.insertMaddindate(LocalDate.now());
+        } else {
+            if (maddincache.isBefore(LocalDate.now().minus(6, ChronoUnit.DAYS))) {
+                Util.insertMaddindate(LocalDate.now());
+            } else {
+                Period cooldown = maddincache.until(LocalDate.now().minus(6, ChronoUnit.DAYS));
+                message = "Befehl ist grad auf Cooldown \n Zeit verbleibend: " + cooldown.getDays()*-1 + "Tage";
+                channel.sendMessage(message).queue();
+                return;
+            }
+        }
+
         try {
             ping = client.getUserByTag("Maddin#7057").getAsMention();
         }catch (NullPointerException e){
