@@ -47,7 +47,7 @@ public class Commands {
         }
 
         try {
-            ping = client.getUserByTag("Maddin#7057").getAsMention();
+            ping = client.getUserByTag("EinfachMaddin#7057").getAsMention(); //eventuell die UserId von Maddin Hardreincoden, damit das auch bei Namechange noch geht
         }catch (NullPointerException e){
             ping =  member.getAsMention();
         }

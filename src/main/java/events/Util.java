@@ -70,18 +70,17 @@ public class Util {
         return 0;
 
     }
+
     public static LocalDate getMaddindate() {
       try {
             ResultSet rs1 = SQLite.onQuery("SELECT time FROM Maddin WHERE MID =(select max(MID) From Maddin)");
             return LocalDate.parse(rs1.getString("time"));
-
-
        } catch (SQLException e) {
           e.printStackTrace();
         }
       return null;
-
     }
+
     public static void insertMaddindate(LocalDate newtime) {
         SQLite.onQuery("INSERT INTO Maddin (time) VALUES ('"+newtime.toString()+"');");
     }
